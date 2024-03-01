@@ -245,16 +245,38 @@ export default function ForumPage_Navbar() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <ChatBot />
-            {/* <IconButton
+            {/* <Tooltip title="AI聊天室" arrow>
+              <IconButton
                 size="large"
                 aria-label="show 4 new mails"
                 color="inherit"
               >
                 <Badge color="error">
-                  <img alt='小組聊天室' src={CommunityIcon} width={24} height={24} />
+                  <img
+                    alt="AI聊天室"
+                    src={CommunityIcon}
+                    width={24}
+                    height={24}
+                  />
                 </Badge>
-              </IconButton> */}
-
+              </IconButton>
+            </Tooltip> */}
+            <Tooltip title="小組聊天室" arrow>
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+              >
+                <Badge color="error">
+                  <img
+                    alt="小組聊天室"
+                    src={CommunityIcon}
+                    width={24}
+                    height={24}
+                  />
+                </Badge>
+              </IconButton>
+            </Tooltip>
             <Tooltip title="任務公告" arrow>
               <IconButton
                 size="large"

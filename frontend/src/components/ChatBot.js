@@ -7,8 +7,9 @@ import React, { useContext, useState, useEffect } from 'react';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import FaceIcon from '@mui/icons-material/Face';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-import ListItemText from '@mui/material/ListItemText';
+// import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
+import CommunityIcon from '../assets/CommunityIcon.png';
 
 import {
   Grid,
@@ -16,11 +17,23 @@ import {
   Button,
   TextareaAutosize,
   TextField,
+  // List,
+  // ListItem,
+  Paper,
+  // Typography,
+  Collapse,
+  Box,
+  Toolbar,
+  Tooltip,
   List,
   ListItem,
-  Paper,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Typography,
-  Collapse,
+  Divider,
+  IconButton,
+  Badge,
 } from '@mui/material';
 import axios from 'axios';
 
@@ -39,7 +52,7 @@ export const ChatBot = () => {
   const sendMessageToPython = async () => {
     try {
       const response = await axios.post(
-        'http://127.0.0.1:8000/react/chatbot/nextstep',
+        'http://127.0.0.1:8000/react/chatbot/ideaimprove',
         {
           messages: [{ role: 'user', content: message }],
         }
@@ -70,76 +83,83 @@ export const ChatBot = () => {
   };
 
   return (
-    <div>
-      <Avatar
-        sx={{ width: 100, height: 100, cursor: 'pointer' }}
-        alt={clickRobot ? 'robotStand' : 'robotSay'}
-        src={clickRobot ? robotStand : robotSay}
-        onClick={handleClick}
-      />
+    // <div>
+    //   <Avatar
+    //     sx={{ width: 24, height: 24, cursor: 'pointer' }}
+    //     alt={clickRobot ? 'robotStand' : 'robotSay'}
+    //     src={clickRobot ? robotStand : robotSay}
+    //     onClick={handleClick}
+    //   />
 
-      <Collapse in={clickRobot}>
-        <Paper elevation={0}>
-          <List>
-            <Paper elevation={0}>
-              <List>
-                {messageLog.map((message, index) =>
-                  message.role !== 'system' ? (
-                    <ListItem
-                      key={index}
-                      style={{
-                        justifyContent:
-                          message.role === 'assistant'
-                            ? 'flex-start'
-                            : 'flex-end',
-                        flexDirection: 'column', // 將排列方向改為垂直
-                        alignItems:
-                          message.role === 'assistant'
-                            ? 'flex-start'
-                            : 'flex-end', // 調整對齊方式
-                      }}
-                    >
-                      <Avatar className="chat-image avatar">
-                        {message.role === 'assistant' ? (
-                          <SmartToyIcon />
-                        ) : (
-                          <FaceIcon />
-                        )}
-                      </Avatar>
+    //   <Collapse in={clickRobot}>
+    //     <Paper elevation={0}>
+    //       <List>
+    //         <Paper elevation={0}>
+    //           <List>
+    //             {messageLog.map((message, index) =>
+    //               message.role !== 'system' ? (
+    //                 <ListItem
+    //                   key={index}
+    //                   style={{
+    //                     justifyContent:
+    //                       message.role === 'assistant'
+    //                         ? 'flex-start'
+    //                         : 'flex-end',
+    //                     flexDirection: 'column', // 將排列方向改為垂直
+    //                     alignItems:
+    //                       message.role === 'assistant'
+    //                         ? 'flex-start'
+    //                         : 'flex-end', // 調整對齊方式
+    //                   }}
+    //                 >
+    //                   <Avatar className="chat-image avatar">
+    //                     {message.role === 'assistant' ? (
+    //                       <SmartToyIcon />
+    //                     ) : (
+    //                       <FaceIcon />
+    //                     )}
+    //                   </Avatar>
 
-                      <div>{message.content}</div>
-                    </ListItem>
-                  ) : null
-                )}
-              </List>
-            </Paper>
-            <Paper elevation={0} className="">
-              {/* <div className="form-control w-full "> */}
-              <Grid
-                container
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Grid item xs={11}>
-                  <TextField
-                    placeholder="使用者訊息"
-                    variant="outlined"
-                    fullWidth
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={1}>
-                  <Button variant="text" onClick={() => updateChatLog()}>
-                    <SendRoundedIcon sx={{ fontSize: 40 }} />
-                  </Button>
-                </Grid>
-              </Grid>
-            </Paper>
-            {/* </div> */}
-          </List>
-        </Paper>
-      </Collapse>
-    </div>
+    //                   <div>{message.content}</div>
+    //                 </ListItem>
+    //               ) : null
+    //             )}
+    //           </List>
+    //         </Paper>
+    //         <Paper elevation={0} className="">
+    //           {/* <div className="form-control w-full "> */}
+    //           <Grid
+    //             container
+    //             alignItems="center"
+    //             justifyContent="space-between"
+    //           >
+    //             <Grid item xs={11}>
+    //               <TextField
+    //                 placeholder="使用者訊息"
+    //                 variant="outlined"
+    //                 fullWidth
+    //                 value={message}
+    //                 onChange={(e) => setMessage(e.target.value)}
+    //               />
+    //             </Grid>
+    //             <Grid item xs={1}>
+    //               <Button variant="text" onClick={() => updateChatLog()}>
+    //                 <SendRoundedIcon sx={{ fontSize: 40 }} />
+    //               </Button>
+    //             </Grid>
+    //           </Grid>
+    //         </Paper>
+    //         {/* </div> */}
+    //       </List>
+    //     </Paper>
+    //   </Collapse>
+    // </div>
+    <Tooltip title="AI聊天室" arrow>
+      <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+        <Badge color="error">
+          <img alt="AI聊天室" src={CommunityIcon} width={24} height={24} />
+        </Badge>
+      </IconButton>
+    </Tooltip>
   );
-}
+};
